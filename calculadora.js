@@ -1,7 +1,12 @@
 var expresion = "";
+var onInputResetDisplay = false;
 function agregarCaracter(pChar)
 {
-    
+  if (onInputResetDisplay)
+  {
+    expresion = "";
+    onInputResetDisplay = false;
+  }
     var numeros = ['0','1','2','3','4','5','6','7','8','9'];
  
  var ultimoEsNumero = false;
@@ -69,8 +74,7 @@ function ResolverExpresion(pExpresion)
   var expDer = "";
   var operacion = "";
   var split = 0;
-
-  for (let i = 0; i < newExpresion.length; i++) {
+  for (let i = 1; i < newExpresion.length; i++) {
     if (operacion == "")
     {
       if (newExpresion[i] == "*"){operacion = "*";split = i;}
@@ -109,7 +113,9 @@ function Resolver(){
   let startTime = performance.now();
   
   UserLog("Resolviendo " + expresion);
-  expresion = ""+(ResolverExpresion(expresion));
+  var resultado = ResolverExpresion(expresion);
+  if(isNaN(resultado) || !isFinite(resultado)) onInputResetDisplay = true;
+  expresion = ""+resultado;
   UserLog(expresionCompleta + " = " + expresion);
   
   let endTime = performance.now();
