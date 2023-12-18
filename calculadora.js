@@ -17,7 +17,6 @@ for (let i = 0; i < numeros.length; i++) {
     if (charEsNumero)
     {
         expresion = expresion + pChar;
-        UserLog("Se agrego el numero '" + pChar + "' a la expresion");
         display.value = expresion;
         return;
     }
@@ -33,14 +32,12 @@ for (let i = 0; i < numeros.length; i++) {
     if (charEsNumero)
     {
         expresion = expresion + pChar;
-        UserLog("Se agrego el numero '" + pChar + "' a la expresion");
         display.value = expresion;
         return;
     }
     else
     {
         expresion = expresion + pChar;
-        UserLog("Se agrego la operacion '" + pChar + "' a la expresion");
         display.value = expresion;
         return;
     }
@@ -50,14 +47,13 @@ for (let i = 0; i < numeros.length; i++) {
   if (charEsNumero)
   {
     expresion = expresion + pChar;
-    UserLog("Se agrego el numero '" + pChar + "' a la expresion");
     display.value = expresion;
     return;
   }
   else
   {
+    UserLog("No se pueden poner dos operadores seguidos. Se reemplazo '"+expresion[expresion.length-1]+ "' por '" + pChar + "'.");
     expresion = expresion.slice(0,-1) + pChar;
-    UserLog("El ultimo caracter NO es numero, se reemplazo el ultimo caracter por '" + pChar + "'")
     display.value = expresion;
     return;
   }
@@ -110,9 +106,17 @@ function ResolverExpresion(pExpresion)
 
 function Resolver(){
   var expresionCompleta = expresion;
+  let startTime = performance.now();
+  
   UserLog("Resolviendo " + expresion);
   expresion = ""+(ResolverExpresion(expresion));
   UserLog(expresionCompleta + " = " + expresion);
+  
+  let endTime = performance.now();
+  let timeElapsed = endTime - startTime;
+  UserLog("Resuelto en " + timeElapsed + "milisegundos.");
+  
+  
   
   display.value = expresion;
   
