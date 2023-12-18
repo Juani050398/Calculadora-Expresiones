@@ -111,7 +111,7 @@ function ResolverExpresion(pExpresion)
 function Resolver(){
   var expresionCompleta = expresion;
   UserLog("Resolviendo " + expresion);
-  expresion = ResolverExpresion(expresion)
+  expresion = ""+(ResolverExpresion(expresion));
   UserLog(expresionCompleta + " = " + expresion);
   
   display.value = expresion;
